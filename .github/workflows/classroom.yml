@@ -1,0 +1,29 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Inlämning_nr_3
+      id: inlamning_nr_3
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Inlämning_nr_3
+        setup-command: ''
+        command: make test
+        timeout: 10
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        INLAMNING_NR_3_RESULTS: "${{steps.inlamning_nr_3.outputs.result}}"
+      with:
+        runners: inlamning_nr_3
