@@ -12,6 +12,7 @@ float calculate_hypotenuse(float a, float b){
 
 /* ------- Solution ends here ------------*/
 
+
 // This is where you add the function calculate_hypotenuse
 
 int main() {
